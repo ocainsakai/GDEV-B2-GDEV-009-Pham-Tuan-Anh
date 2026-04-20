@@ -8,12 +8,38 @@ public class Projectile : MonoBehaviour
     public float speed = 10f;
     [SerializeField] private int damage = 10;
     [SerializeField] private float lifetime = 3f;
-        // Update is called once per frame
+    [SerializeField] private int maxBounces = 3;
+    private int bounceCount;
+
     void FixedUpdate()
     {
-        transform.Translate(direction * speed * Time.fixedDeltaTime);
-        if (MapBoundary.Instance != null && !MapBoundary.Instance.IsInBounds(transform.position))
-            Destroy(gameObject);
+        Vector2 newPos = (Vector2)transform.position + direction * speed * Time.fixedDeltaTime;
+
+        if (MapBoundary.Instance != null)
+        {
+            Bounds b = MapBoundary.Instance.Bounds;
+
+            if (newPos.x <= b.min.x || newPos.x >= b.max.x)
+            {
+                direction.x = -direction.x;
+                newPos.x = Mathf.Clamp(newPos.x, b.min.x, b.max.x);
+                bounceCount++;
+            }
+            if (newPos.y <= b.min.y || newPos.y >= b.max.y)
+            {
+                direction.y = -direction.y;
+                newPos.y = Mathf.Clamp(newPos.y, b.min.y, b.max.y);
+                bounceCount++;
+            }
+
+            if (bounceCount > maxBounces)
+            {
+                Destroy(gameObject);
+                return;
+            }
+        }
+
+        transform.position = newPos;
     }
     public void SetDirection(Vector2 dir)
     {
