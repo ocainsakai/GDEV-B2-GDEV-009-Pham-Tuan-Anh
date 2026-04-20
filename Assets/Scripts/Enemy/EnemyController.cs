@@ -15,6 +15,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private EnemyMovement enemyMovement;
     [SerializeField] private EnemyDetection enemyDetection;
     [SerializeField] private Health health;
+    [SerializeField] private int collisionDamage = 10;
 
     private IEnumerator ramdomMoveCoroutine;
     void Awake()
@@ -96,5 +97,17 @@ public class EnemyController : MonoBehaviour
         Vector2 directionToPlayer = (player.transform.position - transform.position).normalized;
         enemyMovement.moveSpeed = player.GetComponent<PlayerMovement>().moveSpeed * 1.2f; // Move faster than player
         enemyMovement.direction = directionToPlayer;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Health playerHealth = collision.gameObject.GetComponent<Health>();
+            if (playerHealth != null)
+                playerHealth.TakeDamage(collisionDamage);
+
+            health.TakeDamage(collisionDamage);
+        }
     }
 }
