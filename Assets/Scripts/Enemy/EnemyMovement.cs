@@ -7,5 +7,7 @@ public class EnemyMovement : MonoBehaviour
     void FixedUpdate()
     {
         transform.position += (Vector3)(direction * moveSpeed * Time.fixedDeltaTime);
+        if (MapBoundary.Instance != null)
+            transform.position = (Vector3)MapBoundary.Instance.Clamp(transform.position);
     }
 }

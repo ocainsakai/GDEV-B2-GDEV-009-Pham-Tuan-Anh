@@ -20,7 +20,9 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector3 mousePos = Input.mousePosition;
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
-            targetPosition = worldPos;
+            targetPosition = MapBoundary.Instance != null
+                ? MapBoundary.Instance.Clamp(worldPos)
+                : (Vector2)worldPos;
             Debug.Log("Target Position: " + targetPosition);
         }
     }
@@ -35,6 +37,8 @@ public class PlayerMovement : MonoBehaviour
         {
             direction = (targetPosition - (Vector2)transform.position).normalized;
             transform.position += (Vector3)(direction * moveSpeed * Time.fixedDeltaTime);
+            if (MapBoundary.Instance != null)
+                transform.position = (Vector3)MapBoundary.Instance.Clamp(transform.position);
         }
 
     }

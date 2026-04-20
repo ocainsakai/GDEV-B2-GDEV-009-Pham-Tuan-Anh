@@ -12,7 +12,8 @@ public class Projectile : MonoBehaviour
     void FixedUpdate()
     {
         transform.Translate(direction * speed * Time.fixedDeltaTime);
-        // transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
+        if (MapBoundary.Instance != null && !MapBoundary.Instance.IsInBounds(transform.position))
+            Destroy(gameObject);
     }
     public void SetDirection(Vector2 dir)
     {
