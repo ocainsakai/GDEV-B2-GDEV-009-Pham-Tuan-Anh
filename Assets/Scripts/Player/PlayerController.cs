@@ -9,7 +9,12 @@ public class PlayerController : MonoBehaviour
         {
             health = GetComponent<Health>();
         }
-        health.onDeath += () => Destroy(gameObject);
+        health.onDeath += () =>
+        {
+            if (GameManager.Instance != null)
+                GameManager.Instance.Lose();
+            Destroy(gameObject);
+        };
     }
    
 }
