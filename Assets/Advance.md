@@ -1,0 +1,1 @@
+- When a bullet hits the edge of the square boundary, it boundce back and continues travelling. the number of bounces is adjustable via a public variant in Inspector. Bullet lifetime is also adjustable via Inspector.
