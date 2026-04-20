@@ -585,6 +585,7 @@ GameObject:
   - component: {fileID: 1502568483}
   - component: {fileID: 1502568484}
   - component: {fileID: 1502568485}
+  - component: {fileID: 1502568486}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -772,6 +773,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShooter
   shooter: {fileID: 1953739937}
   playerMovement: {fileID: 1502568483}
+--- !u!114 &1502568486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502568478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 972219aa311094bcb9b21965f886a0c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
 --- !u!1 &1953739935
 GameObject:
   m_ObjectHideFlags: 0
