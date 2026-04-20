@@ -185,3 +185,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   enemyMovement: {fileID: 6420556359326430686}
   enemyDetection: {fileID: 2659103569175119631}
+  health: {fileID: 3480303202042641436}
+  collisionDamage: 1
